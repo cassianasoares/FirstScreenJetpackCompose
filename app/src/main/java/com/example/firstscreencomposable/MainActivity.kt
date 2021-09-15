@@ -62,7 +62,7 @@ fun MainScreen(categoryOptions: List<Category> = categoryList,
             modifier = Modifier.fillMaxSize()) {
             UserCard()
 
-            Surface(color = Color.LightGray,
+            Surface(color = MaterialTheme.colors.secondaryVariant,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp)
@@ -122,9 +122,9 @@ fun UserCard(){
             modifier = Modifier.padding(16.dp)
         ) {
             Column {
-                Text(text = "Welcome back",
-                    style = MaterialTheme.typography.subtitle1)
-                Text(text = "John Wick",
+                Text(text = "Welcome back", color = Color.White,
+                    style = MaterialTheme.typography.subtitle2)
+                Text(text = "John Wick",  color = Color.White,
                     style = MaterialTheme.typography.h4)
             }
             IconCard(icon = R.drawable.john, padding = 0.dp)
@@ -135,7 +135,7 @@ fun UserCard(){
 @Composable
 fun IconCard(icon: Int, padding: Dp){
     Card(shape = CircleShape,
-        backgroundColor = MaterialTheme.colors.primary,
+        backgroundColor = MaterialTheme.colors.secondary,
         border = BorderStroke(1.dp, Color.White)
     ) {
         Image(painter = painterResource(id = icon),
@@ -150,6 +150,7 @@ fun CategoryChipCard(category: Category, selectedOption: String,
                      onOptionSelected: (name: String) -> Unit){
     Card(modifier = Modifier
         .padding(8.dp)
+        .width(70.dp)
         .selectable(
             selected = (category.name == selectedOption),
             onClick = { onOptionSelected(category.name) },
@@ -157,8 +158,8 @@ fun CategoryChipCard(category: Category, selectedOption: String,
         ),
         backgroundColor = if (category.name == selectedOption)
             MaterialTheme.colors.primary
-        else Color.LightGray,
-        border = BorderStroke(1.dp, MaterialTheme.colors.primary)
+        else MaterialTheme.colors.secondaryVariant,
+        border = BorderStroke(1.dp, MaterialTheme.colors.secondary)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly,
