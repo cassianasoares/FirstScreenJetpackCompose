@@ -25,8 +25,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.firstscreencomposable.ui.theme.FirstScreenComposableTheme
-
+import com.example.firstscreencomposable.ui.theme.*
 
 
 class MainActivity : ComponentActivity() {
@@ -62,7 +61,7 @@ fun MainScreen(categoryOptions: List<Category> = categoryList,
             modifier = Modifier.fillMaxSize()) {
             UserCard()
 
-            Surface(color = MaterialTheme.colors.secondaryVariant,
+            Surface(color = MaterialTheme.colors.chipsSurface,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp)
@@ -111,7 +110,7 @@ fun MainScreen(categoryOptions: List<Category> = categoryList,
 
 @Composable
 fun UserCard(){
-    Card(backgroundColor = MaterialTheme.colors.primary,
+    Card(backgroundColor = MaterialTheme.colors.userCardBackground,
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 16.dp, top = 16.dp, end = 16.dp),
@@ -157,9 +156,12 @@ fun CategoryChipCard(category: Category, selectedOption: String,
             role = Role.RadioButton
         ),
         backgroundColor = if (category.name == selectedOption)
-            MaterialTheme.colors.primary
-        else MaterialTheme.colors.secondaryVariant,
-        border = BorderStroke(1.dp, MaterialTheme.colors.secondary)
+            MaterialTheme.colors.chipCardSelectedBackground
+        else MaterialTheme.colors.chipCardBackground,
+        border = BorderStroke(1.dp,
+            if(category.name == selectedOption)
+                MaterialTheme.colors.chipCardSelectedBackground
+            else MaterialTheme.colors.chipCardStroke)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly,
@@ -183,7 +185,7 @@ fun DeviceCard(device: Device){
         elevation = 8.dp,
         border = BorderStroke(1.dp,
             if(device.status.value)
-                MaterialTheme.colors.secondaryVariant
+                MaterialTheme.colors.deviceCardSelectedStroke
             else Color.LightGray)
     ) {
         Column(verticalArrangement = Arrangement.SpaceAround,
